@@ -1,0 +1,1 @@
+# diff-glossary-cncf-ptbr
