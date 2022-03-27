@@ -17,9 +17,9 @@ jobs:
             git clone -b main https://github.com/cncf/glossary.git upstream
             git clone -b dev-pt https://github.com/cncf/glossary.git dev-pt
             echo "Updated files: "
-            diff --brief -r upstream/content/en dev-pt/content/pt-br | grep differ | awk '/content/ {print $2}'
+            diff --brief -r upstream/content/en dev-pt/content/pt-br | grep differ | awk '/content/ {print $2}' > $UPDATED_FILES
             echo "Files that exists only in main:"
-            diff --brief -r upstream/content/en dev-pt/content/pt-br | grep "Only in upstream/content/en" | cut -d" " -f3-4
+            diff --brief -r upstream/content/en dev-pt/content/pt-br | grep "Only in upstream/content/en" | cut -d" " -f3-4 > $NEW_FILES
     
       - name: Setup input- update
         id: update
@@ -29,17 +29,7 @@ jobs:
         id: new
         run: echo "::set-output name=file_only::$(diff --brief -r upstream/content/en dev-pt/content/pt-br | grep "Only in upstream/content/en" | cut -d" " -f3-4 > only-main-diff.md)"
 
-      - name: Create the issue
-        uses: actions-ecosystem/action-create-issue@v1
-        with:
-          github_token: ${{ secrets.github_token }}
-          title: Diff files cncf/glossary to pt-br
-          body: |
-            Arquivos atualizados:
-            ${{ steps.update.outputs.file_update }}
-
-            Arquivos novos em main:
-            ${{ steps.new.outputs.file_only }}
-          labels: |
-            weekly
+      - uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             
