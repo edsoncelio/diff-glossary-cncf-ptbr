@@ -48,7 +48,7 @@ jobs:
         id: update
         run: echo "::set-output name=file_update::$(cat update-diff.md)"
       - name: Read the files - only
-        id: update
+        id: new
         run: echo "::set-output name=file_only::$(cat only-main-diff.md)"
       - name: Create the issue
         uses: actions-ecosystem/action-create-issue@v1
@@ -57,7 +57,7 @@ jobs:
           title: Diff files cncf/glossary to pt-br
           body: |
             ${{ steps.update.outputs.file_update }}
-            ${{ steps.update.outputs.file_only }}
+            ${{ steps.new.outputs.file_only }}
           labels: |
             weekly
             
