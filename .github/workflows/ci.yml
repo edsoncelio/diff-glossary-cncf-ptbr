@@ -36,9 +36,20 @@ jobs:
   create_issue:
     runs-on: ubuntu-latest
     steps:
-      - name: Read the files
+      - name: Download update-diff
+        uses: actions/download-artifact@v3
+        with:
+          name: diff-file-update
+      - name: Download only-main-diff
+        uses: actions/download-artifact@v3
+        with:
+          name: diff-file-only
+      - name: Read the files - update
         id: update
         run: echo "::set-output name=file_update::$(cat update-diff.md)"
+      - name: Read the files - only
+        id: update
+        run: echo "::set-output name=file_only::$(cat only-main-diff.md)"
       - name: Create the issue
         uses: actions-ecosystem/action-create-issue@v1
         with:
@@ -46,6 +57,7 @@ jobs:
           title: Diff files cncf/glossary to pt-br
           body: |
             ${{ steps.update.outputs.file_update }}
+            ${{ steps.update.outputs.file_only }}
           labels: |
             weekly
             
