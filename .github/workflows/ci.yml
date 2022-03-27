@@ -57,7 +57,10 @@ jobs:
           github_token: ${{ secrets.github_token }}
           title: Diff files cncf/glossary to pt-br
           body: |
+            Arquivos atualizados:
             ${{ steps.update.outputs.file_update }}
+
+            Arquivos novos em main:
             ${{ steps.new.outputs.file_only }}
           labels: |
             weekly
