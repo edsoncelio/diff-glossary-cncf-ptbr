@@ -26,5 +26,6 @@ jobs:
         with:
           name: diff-files
           path: |
-            upstream/*.md
-            dev-pt/*.md
+            update-diff.md
+            only-main-diff.md
+  
