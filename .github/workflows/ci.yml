@@ -32,6 +32,6 @@ jobs:
       - uses: JasonEtco/create-an-issue@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          UPDATED_FILES: ${{ steps.update.file_update }}
-          NEW_FILES: ${{ steps.new.file_only }}
+          UPDATED_FILES: ${{ steps.update.outputs.file_update }}
+          NEW_FILES: ${{ steps.new.outputs.file_only }}
             
