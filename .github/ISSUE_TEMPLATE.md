@@ -1,5 +1,5 @@
 ---
-title: Diff main/dev-pt - {{ date | date('dddd, MMMM Do') }}
+title: Diff main/dev-pt - {{ date | date('DD/MM/YYYY') }}
 labels: diff
 ---
 
