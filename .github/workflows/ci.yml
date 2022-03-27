@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  diff:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,11 +21,27 @@ jobs:
             echo "Files that exists only in main:"
             diff --brief -r upstream/content/en dev-pt/content/pt-br | grep "Only in upstream/content/en" | cut -d" " -f3-4 > only-main-diff.md
 
-      - name: Archive diff results
+      - name: Archive diff - update
         uses: actions/upload-artifact@v3
         with:
-          name: diff-files
-          path: |
-            update-diff.md
-            only-main-diff.md
-  
+          name: diff-file-update
+          path: update-diff.md
+          
+      - name: Archive diff - only
+        uses: actions/upload-artifact@v3
+        with:
+          name: diff-file-only
+          path: only-main-diff.md
+    
+  create_issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create an issue
+        uses: actions-ecosystem/action-create-issue@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          title: Diff files - main -> dev-pt
+          body: |
+                  This is a test
+          labels: |
+            test
