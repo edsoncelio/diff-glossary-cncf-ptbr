@@ -22,5 +22,7 @@ jobs:
             mkdir upstream && mkdir dev-pt
             git clone -b main https://github.com/cncf/glossary.git upstream
             git clone -b dev-pt https://github.com/cncf/glossary.git dev-pt
+            echo "Updated files: "
             diff --brief -r upstream/content/en dev-pt/content/pt-br | grep differ | awk '/content/ {print $2}'
+            echo "Files that exists only in main:"
             diff --brief -r upstream/content/en dev-pt/content/pt-br | grep "Only in upstream/content/en" | cut -d" " -f3-4
