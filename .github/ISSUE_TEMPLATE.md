@@ -1,6 +1,6 @@
 ---
 title: Diff main/dev-pt - {{ date | date('DD/MM/YYYY') }}
-labels: diff
+labels: diff, weekly
 ---
 
 Diff de arquivos da branch `main` para a branch `dev-pt`.
