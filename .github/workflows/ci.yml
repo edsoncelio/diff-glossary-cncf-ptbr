@@ -36,12 +36,16 @@ jobs:
   create_issue:
     runs-on: ubuntu-latest
     steps:
-      - name: Create an issue
+      - name: Read the files
+        id: update
+        run: echo "::set-output name=file_update::$(cat update-diff.md)"
+      - name: Create the issue
         uses: actions-ecosystem/action-create-issue@v1
         with:
           github_token: ${{ secrets.github_token }}
-          title: Diff files - main -> dev-pt
+          title: Diff files cncf/glossary to pt-br
           body: |
-                  This is a test
+            ${{ steps.update.outputs.file_update }}
           labels: |
-            test
+            weekly
+            
