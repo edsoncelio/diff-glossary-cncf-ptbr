@@ -17,9 +17,9 @@ jobs:
             git clone -b main https://github.com/cncf/glossary.git upstream
             git clone -b dev-pt https://github.com/cncf/glossary.git dev-pt
             echo "Updated files: "
-            diff --brief -r upstream/content/en dev-pt/content/pt-br | grep differ | awk '/content/ {print $2}' > $UPDATED_FILES
+            diff --brief -r upstream/content/en dev-pt/content/pt-br | grep differ | awk '/content/ {print $2}' 
             echo "Files that exists only in main:"
-            diff --brief -r upstream/content/en dev-pt/content/pt-br | grep "Only in upstream/content/en" | cut -d" " -f3-4 > $NEW_FILES
+            diff --brief -r upstream/content/en dev-pt/content/pt-br | grep "Only in upstream/content/en" | cut -d" " -f3-4
     
       - name: Setup input- update
         id: update
@@ -32,4 +32,6 @@ jobs:
       - uses: JasonEtco/create-an-issue@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          UPDATED_FILES: ${{ steps.update.file_update }}
+          NEW_FILES: ${{ steps.new.file_only }}
             
