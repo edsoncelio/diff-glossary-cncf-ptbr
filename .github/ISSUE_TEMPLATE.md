@@ -1,9 +1,16 @@
 ---
-title: Diff main/dev-pt 
+title: Diff main/dev-pt - {{ date | date('dddd, MMMM Do') }}
 labels: diff
 ---
-Arquivos atualizados:
-{{ env.UPDATED_FILES }}
 
-Arquivos novos:
+Diff de arquivos da branch `main` para a branch `dev-pt`.
+
+## Arquivos atualizados:
+```shell
+{{ env.UPDATED_FILES }}
+```
+
+## Arquivos novos:
+```shell
 {{ env.NEW_FILES }}
+```
