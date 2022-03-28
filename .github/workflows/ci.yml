@@ -13,7 +13,6 @@ jobs:
 
       - name: Execute the diff
         run: |
-            mkdir upstream && mkdir dev-pt
             git clone -b main https://github.com/cncf/glossary.git upstream
             git clone -b dev-pt https://github.com/cncf/glossary.git dev-pt
             echo "Updated files: "
