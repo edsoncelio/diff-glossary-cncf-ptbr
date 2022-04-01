@@ -3,14 +3,12 @@ title: Diff main/dev-pt - {{ date | date('DD/MM/YYYY') }}
 labels: diff, weekly
 ---
 
-Diff de arquivos da branch `main` para a branch `dev-pt`.
-
-## Arquivos atualizados:
+## Termos atualizados (updated definitions):
 ```shell
 {{ env.UPDATED_FILES }}
 ```
 
-## Arquivos novos:
+## Termos novos (new definitions added to the main branch):
 ```shell
 {{ env.NEW_FILES }}
 ```
