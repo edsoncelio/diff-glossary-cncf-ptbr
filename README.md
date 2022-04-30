@@ -1,6 +1,6 @@
 # Diff - cncf/glossary
 
-> IN PROGRESS 
+> IN PROGRESS  
 
 This repo will be used to check the diff between `main` and `dev-pt` branch on the repo cncf/glossary.   
 
