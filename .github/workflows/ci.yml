@@ -41,7 +41,7 @@ jobs:
           echo "::set-output name=newFiles::$NEW_FILES"
       - uses: JasonEtco/create-an-issue@v2
         with:
-          filename: .github/ISSUE_TEMPLATE
+          filename: .github/ISSUE_TEMPLATE.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           UPDATED_FILES: ${{ steps.update.outputs.updateFile }}
