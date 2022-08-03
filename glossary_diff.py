@@ -1,16 +1,17 @@
 from asyncio.subprocess import PIPE
 import subprocess
-import os 
+import os
+from sys import stdout 
 
 def clone_repo(branch, uri):
     """clone GH repo"""
     if branch != "main":
         if not os.path.isdir("upstream/"):
             cmd_main = ['git', 'clone', '-b', "main", uri, "upstream"]
-            subprocess.check_output(cmd_main)
+            subprocess.check_output(cmd_main, stderr=subprocess.DEVNULL)
         if not os.path.isdir(f"{branch}/"):
             cmd_dev = ['git', 'clone', '-b', branch, uri, branch]
-            subprocess.check_output(cmd_dev)
+            subprocess.check_output(cmd_dev, stderr=subprocess.DEVNULL)
 
 
 def get_uncompleted(upstream_path):
@@ -67,22 +68,22 @@ if __name__ == "__main__":
     METADATA_LIST = ["upstream/content/en/style-guide/_index.md", "upstream/content/en/_TEMPLATE.md"]
     clone_repo(BRANCH_DEV, REPO_URI)
     out_diff = diff_repo()
-    print("English updated content: ")
+    print("## Updated content")
     for line in out_diff[1]:
         print(line.split(" ")[1])
     print("\n")
 
-    print("Updated metadata: ")
+    print("## Updated metadata")
     out_diff_mt = diff_metadata()
     for line in out_diff_mt[1]:
         print(line.split(" ")[1])
     print("\n")
     
-    print("Uncompleted files - status: Feedback Appreciated: ")
-    out_uncompleted = get_uncompleted("upstream/content/en")
-    for line in out_uncompleted:
-        if line.split(":")[0] not in METADATA_LIST:
-            print(line.split(":")[0])
-    print("\n")
+    # print("Uncompleted files - status: Feedback Appreciated: ")
+    # out_uncompleted = get_uncompleted("upstream/content/en")
+    # for line in out_uncompleted:
+    #     if line.split(":")[0] not in METADATA_LIST:
+    #         print(line.split(":")[0])
+    # print("\n")
         
 

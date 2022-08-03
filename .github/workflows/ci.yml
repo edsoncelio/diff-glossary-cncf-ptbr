@@ -1,4 +1,4 @@
-name: Check diff main/dev-pt
+name: Get the updates
 
 on:
   workflow_dispatch:
@@ -9,8 +9,30 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+
     - uses: actions/setup-python@v4
       with:
-        python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
-        architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
-    - run: python glossary_diff.py
+        python-version: '3.x'
+        architecture: 'x64'
+
+    - name: Run the diff script
+      id: run-diff
+      run: python glossary_diff.py > output.txt
+
+    - name: Prepare output to create the issue
+      id: prepare
+      run: | 
+        OUTPUT=$(cat output.txt)
+        OUTPUT="${NEW_FILES//'%'/'%25'}"
+        OUTPUT="${NEW_FILES//$'\n'/'%0A'}"
+        OUTPUT="${NEW_FILES//$'\r'/'%0D'}"
+        echo "::set-output name=outputFile::$OUTPUT" 
+
+
+    - name: Create an issue
+      uses: actions-ecosystem/action-create-issue@v1
+      with:
+        github_token: ${{ secrets.github_token }}
+        title: [PTBR] Updates from main branch
+        body: |
+          ${{ steps.new.outputs.outputFile }}
