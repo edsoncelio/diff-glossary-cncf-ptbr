@@ -17,7 +17,9 @@ jobs:
 
     - name: Run the diff script
       id: run-diff
-      run: python glossary_diff.py > output.txt
+      run: | 
+        python glossary_diff.py > output.txt
+        cat output.txt
 
     - name: Prepare output to create the issue
       id: prepare
