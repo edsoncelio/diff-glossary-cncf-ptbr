@@ -25,9 +25,9 @@ jobs:
       id: prepare
       run: | 
         OUTPUT=$(cat output.txt)
-        OUTPUT="${NEW_FILES//'%'/'%25'}"
-        OUTPUT="${NEW_FILES//$'\n'/'%0A'}"
-        OUTPUT="${NEW_FILES//$'\r'/'%0D'}"
+        OUTPUT="${OUTPUT//'%'/'%25'}"
+        OUTPUT="${OUTPUT//$'\n'/'%0A'}"
+        OUTPUT="${OUTPUT//$'\r'/'%0D'}"
         echo "::set-output name=outputFile::$OUTPUT" 
 
     - name: Create an issue
