@@ -73,12 +73,12 @@ if __name__ == "__main__":
     clone_repo(BRANCH_DEV, REPO_URI)
     out_diff = diff_repo("upstream/content/en")
 
-    print("English updated content: ")
+    print("## Updated content")
     for line in out_diff[1]:
         print(line.split(" ")[1])
     print("\n")
 
-    print("Updated metadata: ")
+    print("## Updated metadata")
     out_diff_mt = diff_metadata()
     for line in out_diff_mt[1]:
         print(line.split(" ")[1])
