@@ -32,6 +32,6 @@ jobs:
       uses: actions-ecosystem/action-create-issue@v1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        title: [PTBR] Updates from main branch
+        title: PTBR - Updates from main branch
         body: |
           ${{ steps.new.outputs.outputFile }}
