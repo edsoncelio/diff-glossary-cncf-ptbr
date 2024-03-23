@@ -68,7 +68,7 @@ def diff_repo(upstream_path):
 
 if __name__ == "__main__":
     REPO_URI = "https://github.com/cncf/glossary.git"
-    BRANCH_DEV = "dev-pt"
+    BRANCH_DEV = "a83e5b0"
     METADATA_LIST = ["upstream/content/en/style-guide/_index.md", "upstream/content/en/_TEMPLATE.md", "upstream/content/en/style-guide/_index.md","upstream/content/en/contributor-ladder/_index.md" ]
     clone_repo(BRANCH_DEV, REPO_URI)
     out_diff = diff_repo("upstream/content/en")
