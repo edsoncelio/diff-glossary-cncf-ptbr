@@ -10,7 +10,7 @@ def clone_repo(branch, uri):
             cmd_main = ['git', 'clone', '-b', "main", uri, "upstream"]
             subprocess.check_output(cmd_main, stderr=subprocess.DEVNULL)
         if not os.path.isdir(f"{branch}/"):
-            cmd_dev = ['git', 'clone', '-b', branch, URI, "dev-pt"]
+            cmd_dev = ['git', 'clone', '-b', branch, uri, "dev-pt"]
             subprocess.check_output(cmd_dev, stderr=subprocess.DEVNULL)
 
 
